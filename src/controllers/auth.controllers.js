@@ -150,26 +150,28 @@ export const googleCallBack = async (req, res) => {
             const token = jwt.sign({
                 id: newUser._id,
             }, config.JWT_SECRET, { expiresIn: '7d' })
+        res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
 
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: true, // Render uses HTTPS, so this MUST be true
-                sameSite: 'none', // Required for cross-site cookies
-                maxAge: 24 * 60 * 60 * 1000 // 1 day
-            })
+            // res.cookie('token', token, {
+            //     httpOnly: true,
+            //     secure: true, // Render uses HTTPS, so this MUST be true
+            //     sameSite: 'none', // Required for cross-site cookies
+            //     maxAge: 24 * 60 * 60 * 1000 // 1 day
+            // })
         } else {
             const token = jwt.sign({
                 id: findUser._id,
             }, config.JWT_SECRET, { expiresIn: '7d' })
 
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: true, // Render uses HTTPS, so this MUST be true
-                sameSite: 'none', // Required for cross-site cookies
-                maxAge: 24 * 60 * 60 * 1000 // 1 day
-            })
-        }
+            // res.cookie('token', token, {
+            //     httpOnly: true,
+            //     secure: true, // Render uses HTTPS, so this MUST be true
+            //     sameSite: 'none', // Required for cross-site cookies
+            //     maxAge: 24 * 60 * 60 * 1000 // 1 day
+            // })
         res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
+
+        }
 
     } catch (error) {
         res.status(500).json({
