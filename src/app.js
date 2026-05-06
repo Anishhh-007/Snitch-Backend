@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended : true}))
 app.use(cp())
 
 app.use(cors({
-  origin: config.VITE_URI,
+  origin: 'https://snitch-frontend-qedb.vercel.app',
   credentials: true
 }));
 
