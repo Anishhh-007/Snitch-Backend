@@ -29,5 +29,6 @@ export const config = {
     GOOGLE_CLIENT_ID:process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET : process.env.GOOGLE_CLIENT_SECRET,
     IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY,
-    MISTRAL_API_KEY:process.env.MISTRAL_API_KEY
+    MISTRAL_API_KEY:process.env.MISTRAL_API_KEY,
+    VITE_URI:process.env.VITE_URI
 }
