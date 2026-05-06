@@ -169,7 +169,7 @@ export const googleCallBack = async (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000 // 1 day
             })
         }
-        res.redirect("http://localhost:5173")
+        res.redirect(config.VITE_URI)
 
     } catch (error) {
         res.status(500).json({
