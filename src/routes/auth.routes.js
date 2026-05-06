@@ -11,7 +11,7 @@ authRouter.post("/register" ,validateRegister ,registerAuth)
 authRouter.post("/login" ,validateLogin ,loginAuth)
 authRouter.post('/logout' , userAuth ,logoutAuth )
 authRouter.get("/get-user" ,userAuth, getUser)
-router.post('/auth/google/set-cookie', setGoogleCookie);
+authRouter.post('/auth/google/set-cookie', setGoogleCookie);
 authRouter.get("/google" , passport.authenticate("google" , {
     scope : ["profile" , "email"]
 }))  
