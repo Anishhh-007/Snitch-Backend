@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended : true}))
 app.use(cp())
 
 app.use(cors({
-  origin: 'https://snitch-frontend-qedb.vercel.app',
+  origin: config.VITE_URI,
   credentials: true
 }));
 
@@ -25,7 +25,7 @@ app.use(passport.initialize())
 passport.use(new GoogleStrategy({
    clientID : config.GOOGLE_CLIENT_ID,
    clientSecret : config.GOOGLE_CLIENT_SECRET,
-   callbackURL : "/api/auth/google/callback"
+   callbackURL : `${config.VITE_URI}/api/auth/google/callback`
 } , (_ , __ , profile , done) =>{
     return done (null , profile)
 }))
