@@ -20,12 +20,14 @@ if(!process.env.IMAGEKIT_PRIVATE_KEY) {
 if(!process.env.MISTRAL_API_KEY) {
     throw new Error("MISTRAL_API_KEY  is not defined")
 }
+if(!process.env.VITE_URI) {
+    throw new Error("VITE_URI  is not defined")
+}
 
 
 export const config = {
     MONGO_URI:process.env.MONGO_URI,
     JWT_SECRET:process.env.JWT_SECRET,
-    VITE_URI : process.env.VITE_URI,
     GOOGLE_CLIENT_ID:process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET : process.env.GOOGLE_CLIENT_SECRET,
     IMAGEKIT_PRIVATE_KEY: process.env.IMAGEKIT_PRIVATE_KEY,
