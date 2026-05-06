@@ -205,7 +205,6 @@ export const setGoogleCookie = (req, res) => {
 
         // Verify it's a valid token, not tampered
        const verify =  jwt.verify(token, config.JWT_SECRET);
-console.log(verify)
         res.cookie('token', token, {
             httpOnly: true,
             secure: true,
