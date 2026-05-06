@@ -94,7 +94,7 @@ export const loginAuth = async (req, res) => {
                 username: user.username,
                 email: user.email,
                 fullname: user.fullname,
-                role : user.role
+                role: user.role
             }
         })
 
@@ -150,7 +150,7 @@ export const googleCallBack = async (req, res) => {
             const token = jwt.sign({
                 id: newUser._id,
             }, config.JWT_SECRET, { expiresIn: '7d' })
-        res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
+            res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
 
             // res.cookie('token', token, {
             //     httpOnly: true,
@@ -169,7 +169,7 @@ export const googleCallBack = async (req, res) => {
             //     sameSite: 'none', // Required for cross-site cookies
             //     maxAge: 24 * 60 * 60 * 1000 // 1 day
             // })
-        res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
+            res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
 
         }
 
@@ -180,21 +180,42 @@ export const googleCallBack = async (req, res) => {
     }
 }
 
-export function logoutAuth  (req, res)  {
-  try {
-    res.cookie("token", "", {
-      expires: new Date(Date.now()),
-    })
+export function logoutAuth(req, res) {
+    try {
+        res.cookie("token", "", {
+            expires: new Date(Date.now()),
+        })
 
-    return res.status(200).json({
-      success: true,
-      message: "Logged out successfully",
-    })
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "Logout failed",
-    })
-  }
+        return res.status(200).json({
+            success: true,
+            message: "Logged out successfully",
+        })
+    } catch (error) {
+        return res.status(500).json({
+            success: false,
+            message: "Logout failed",
+        })
+    }
 }
 
+
+export const setGoogleCookie = (req, res) => {
+    try {
+        const { token } = req.body;
+
+        // Verify it's a valid token, not tampered
+        jwt.verify(token, config.JWT_SECRET);
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'none',
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+        res.status(200).json({ success: true });
+
+    } catch (error) {
+        res.status(401).json({ message: 'Invalid token' });
+    }
+};
