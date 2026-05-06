@@ -25,7 +25,7 @@ app.use(passport.initialize())
 passport.use(new GoogleStrategy({
    clientID : config.GOOGLE_CLIENT_ID,
    clientSecret : config.GOOGLE_CLIENT_SECRET,
-   callbackURL : `${config.VITE_URI}/api/auth/google/callback`
+   callbackURL : "https://snitch-backend-1.onrender.com/api/auth/google/callback"
 } , (_ , __ , profile , done) =>{
     return done (null , profile)
 }))
