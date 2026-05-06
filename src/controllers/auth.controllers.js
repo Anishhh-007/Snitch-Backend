@@ -169,7 +169,7 @@ export const googleCallBack = async (req, res) => {
                 maxAge: 24 * 60 * 60 * 1000 // 1 day
             })
         }
-        res.redirect(config.VITE_URI)
+        res.redirect(`${config.VITE_URI}/auth/google/success?token=${token}`);
 
     } catch (error) {
         res.status(500).json({
