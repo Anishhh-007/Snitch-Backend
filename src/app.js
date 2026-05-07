@@ -16,10 +16,19 @@ app.use(express.urlencoded({extended : true}))
 app.use(cp())
 
 app.use(cors({
-  origin: config.VITE_URI,
-  credentials: true
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      origin.endsWith(".vercel.app") ||
+      origin === "http://localhost:5173"
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS blocked: ${origin}`));
+    }
+  },
+  credentials: true,
 }));
-
 app.use(passport.initialize())
 
 passport.use(new GoogleStrategy({
